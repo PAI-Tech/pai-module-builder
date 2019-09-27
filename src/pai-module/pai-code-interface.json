@@ -1,0 +1,22 @@
+{
+  "pai-code-version":"1.0",
+  "pai-module-name":"pai-module-builder",
+  "pai-module-params":[
+    "module-name","project-base-folder"
+  ],
+  "pai-code-commands":[
+      {"command-name":"version", "js-function":"version"},
+      {"command-name":"release-notes", "js-function":"get_release_notes"}
+    ],
+  "pai-bot-web-interface": {
+    "static-web-folders": ["public", "packages"],
+    "web-services":[
+      {"service-name":"home","js-function":"get_home"},
+      {"service-name":"create","js-function":"create_module"}
+    ]
+  }
+}
+
+
+
+

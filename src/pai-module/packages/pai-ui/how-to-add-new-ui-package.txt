@@ -1,0 +1,11 @@
+
+How to add pai-ui package ?
+---------------------------
+
+1. Add folder with name = <package-name>
+2. Add <package-name>-server.js for server side functions
+3. Add <package-name>.js for client side functions
+4. Add <package-name>.css for client side stylesheet
+5. Add server side instance in pai-ui.js
+6. Import <package-name> package in page JSON
+7. Enjoy your new package :)
