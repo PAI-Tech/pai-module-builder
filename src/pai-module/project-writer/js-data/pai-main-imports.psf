@@ -1,0 +1,8 @@
+
+const { PAICodeCommand, PAICodeCommandContext, PAICodeModule, PAICode, PAIModuleConfigParam, PAIModuleConfig, PAILogger, PAIModuleCommandSchema, PAIModuleCommandParamSchema } = require('@pai-tech/pai-code');
+const path = require('path');
+const fs = require('fs');
+const pai_module_data = require("./data/pai-module-data").get_instance;
+const pai_code_interface = require("./pai-code-interface");
+const pai_web_router = require("./web-pages/pai-web-router");
+

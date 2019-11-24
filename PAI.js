@@ -27,7 +27,7 @@ async function start(){
     await module.registerModule(); // register the module to PAICode
     
     let context = new PAICodeCommandContext('host','HardCoded');
-    let response = await PAICode.executeString(`pai-module-builder version`,context);
+    let response = await PAICode.executeString(`pai-module-builder who-am-i your-name:"tamir"`,context);
     
     let toPrint = JSON.stringify(response[0].response.data);
     console.log(toPrint);

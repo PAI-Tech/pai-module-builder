@@ -1,48 +1,23 @@
-/**
- * <pai-module-builder>
- * Author       : Tamir Fridman
- * Date Created : 9/25/2019
- * Copyright PAI-TECH 2018, all right reserved
 
- * This file is the entry point of your base module.
-
- *      This program is free software; you can redistribute it and/or
- *		modify it under the terms of the GNU General Public License
- *		as published by the Free Software Foundation; either version
- *		3 of the License, or (at your option) any later version.
-  */
-
-
-const { PAICodeCommand, PAIUtils, PAICodeCommandContext, PAICodeModule, PAICode, PAIModuleConfigParam, PAIModuleConfig, PAILogger, PAIModuleCommandSchema, PAIModuleCommandParamSchema } = require('@pai-tech/pai-code');
-
-
-
-const path = require('path');
-const fs = require('fs');
-const pai_module_data = require("./data/pai-module-data").get_instance;
-const pai_code_interface = require("./pai-code-interface");
-const pai_web_router = require("./web-pages/pai-web-router");
-
-
-class PCM_pai_module_builder extends PAICodeModule
-{
     constructor() {
-
         // Module description that will be shown on info command [your-module-name info]
-        let infoText = `Welcome to PAI Module Builder :)`;
-    
+        let infoText = `
+        Welcome to My Module:
+        This is my first module.
+        `;
+
         super(infoText);
-    
+
+        // Optional: add configuration parameters
         this.config.schema = [
             //PAIModuleConfigParam(label, description, paramName, defaultValue)
-            // TODO: add configuration parameters
         ];
         this.web_static_folders = {};
         this.web_services = {};
         this.pai_web_router = new pai_web_router();
     }
-    
-    
+
+
     /**
      * This method runs when the module is being loaded by the bot it load basic module commands from super
      *
@@ -117,14 +92,14 @@ class PCM_pai_module_builder extends PAICodeModule
 
 
 	}
-    
-    
+
+
     setModuleName()
     {
         return pai_code_interface["pai-module-name"];
     }
-	
-	
+
+
 	/**
 	 * Echo version number of your module
 	 * @param {PAICodeCommand} cmd
@@ -139,21 +114,11 @@ class PCM_pai_module_builder extends PAICodeModule
         return pai_module_data.pai_code_get_all_settings(cmd);
     }
 
-    set_settings_param(cmd) {
-        return pai_module_data.pai_code_set_param(cmd);
-    }
-
     get_release_notes(cmd)
     {
-        let pai_release_notes = fs.readFileSync(path.resolve(__dirname,"release-notes.txt"), 'utf8');
+        var pai_release_notes = fs.readFileSync(path.resolve(__dirname,"release-notes.txt"), 'utf8');
         return pai_release_notes;
     }
-
-    who_am_i(cmd)
-    {
-        return cmd.params["your-name"].value;
-    }
-
 
     http_request(cmd) {
         return new Promise( (resolve,reject) => {
@@ -169,6 +134,8 @@ class PCM_pai_module_builder extends PAICodeModule
                 let f = this.web_static_folders[fold];
                 this.pai_web_router.get_static_folder(req,res,f,route_ep.replace(fold,""));
             }
+
+
             else
             {
                 let out = `${this.setModuleName()} :] hey from web interface`;
@@ -193,6 +160,3 @@ class PCM_pai_module_builder extends PAICodeModule
             }
         });
     }
-}
-
-module.exports = PCM_pai_module_builder;

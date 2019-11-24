@@ -1,12 +1,20 @@
 {
   "pai-code-version":"1.0",
   "pai-module-name":"pai-module-builder",
-  "pai-module-params":[
+  "pai-module-settings":[
     "module-name","project-base-folder"
   ],
   "pai-code-commands":[
       {"command-name":"version", "js-function":"version"},
-      {"command-name":"release-notes", "js-function":"get_release_notes"}
+      {"command-name":"release-notes", "js-function":"get_release_notes"},
+      {"command-name":"get-settings","js-function":"get_settings"},
+      {"command-name":"set-settings-param","js-function":"set_settings_param","params":[
+        {"name":"param-name", "label":"param-name", "description":"param name", "required":true},
+        {"name":"param-value", "label":"param-value", "description":"param value", "required":true}
+      ]},
+      {"command-name":"who-am-i","js-function":"who_am_i","params":[
+        {"name":"your-name", "label":"your-name", "description":"your name", "required":true}
+      ]}
     ],
   "pai-bot-web-interface": {
     "static-web-folders": ["public", "packages"],

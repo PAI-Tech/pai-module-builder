@@ -22,8 +22,8 @@ const pai_code_interface = require("../pai-code-interface");
 class PAI_MODULE_DATA {
     constructor() {
         this.module_data = {
-            "module-name" : pai_code_interface["pai-code-module-name"],
-            "project-base-folder" : "/var/PAI/Projects",
+            "module-name" : pai_code_interface["pai-module-name"],
+            "project-base-folder" : "pai-code-modules",
 
         };
         this.config = null;
@@ -38,7 +38,9 @@ class PAI_MODULE_DATA {
         }
         else
         {
-            this.module_data[param_name] = "please config";
+            if(!this.module_data[param_name]) {
+                this.module_data[param_name] = "please config";
+            }
         }
     }
 
@@ -64,6 +66,30 @@ class PAI_MODULE_DATA {
         return pai_module_data_instance;
     }
 
+    pai_code_set_param(pai_code_command)
+    {
+        let param_name = pai_code_command.params["param-name"].value;
+        let param_value = pai_code_command.params["param-value"].value;
+        if(param_name && param_value)
+        {
+            this.set_param(param_name,param_value) ;
+        }
+        return `BOT settings param ${param_name} = ${param_value}`;
+    }
+
+    pai_code_get_all_settings(pai_code_command)
+    {
+        let out = `
+        Module Settings:
+        ----------------
+        `;
+        for (let k in this.module_data){
+            if (this.module_data.hasOwnProperty(k)) {
+                out+= k + " = " + this.module_data[k] + '\n';
+            }
+        }
+        return out;
+    }
 
 }
 

@@ -110,7 +110,13 @@ class PAI_WEB_ROUTER
     create_module(req, res,route)
     {
 
-        this.js_project_writer.create_project(req.body["pai-module-name"]);
+        let module_data = {
+            "module-name" : req.body["pai-module-name"],
+            "author" : req.body["pai-module-author"],
+            "company-name" : req.body["pai-module-company-name"],
+            "description" : req.body["pai-module-desc"]
+        }
+        this.js_project_writer.create_project(module_data);
         res.send("ok");
     }
 
