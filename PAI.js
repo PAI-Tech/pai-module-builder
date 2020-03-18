@@ -14,7 +14,7 @@
   */
 
 
-const { PAICodeCommand, PAICodeCommandContext, PAICodeModule, PAICode } = require('@pai-tech/pai-code');
+const { PAICodeCommand,PAILogger, PAICodeCommandContext, PAICodeModule, PAICode } = require('@pai-tech/pai-code');
 const { Module } = require('./index');
 
 async function start(){
@@ -27,10 +27,10 @@ async function start(){
     await module.registerModule(); // register the module to PAICode
     
     let context = new PAICodeCommandContext('host','HardCoded');
-    let response = await PAICode.executeString(`pai-module-builder who-am-i your-name:"tamir"`,context);
+    let response = await PAICode.executeString(`pai-module-builder read-file file-path:"/Users/tamirfridman/Documents/dbs/shuvu.csv" out-path:"/Users/tamirfridman/Documents/dbs/"`,context);
     
     let toPrint = JSON.stringify(response[0].response.data);
-    console.log(toPrint);
+    PAILogger.info(toPrint);
     
     PAICode.start();
 }

@@ -47,7 +47,7 @@ class PAI_HOME_PAGE
     get_html(data)
     {
 
-        let ztag = ` <div>PAI MODULE BUILDER</div><hr/>
+        let ztag = ` <div>PAI MODULE BUILDER - Please fill</div><hr/>
         <form name="frm-new-module" action="create" method="post">
                     <div>Module Name</div><div><input type="text" name="pai-module-name" value="my-module"/></div>
                     <div>Author</div><div><input type="text" name="pai-module-author" value="Tamir Fridman"/></div>

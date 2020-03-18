@@ -92,11 +92,16 @@ class PAI_WEB_ROUTER
     {
         let page_data  = {
             id: pai_utils.pai_guid(),
-            import: ["pai-desktop","pai-page-header","pai-page"],
+            import: ["pai-desktop","pai-page-header","pai-page","pai-video-player"],
             metadata: this.get_metadata(),
             content: {
                 "pai-desktop": {
                     "pai-page-header" :  this.get_page_header("fade-in","home"),
+                    "pai-video-player": {
+                        id: "preview-player",
+                        style: "display:block;position:absolute;top:10%;left:10%;width:80%;height:80%",
+                        "video-fill": "fill"
+                    },
                     "pai-page": {
                     }
                 }
