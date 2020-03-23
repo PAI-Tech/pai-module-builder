@@ -27,7 +27,7 @@ async function start(){
     await module.registerModule(); // register the module to PAICode
     
     let context = new PAICodeCommandContext('host','HardCoded');
-    let response = await PAICode.executeString(`pai-module-builder read-file file-path:"/Users/tamirfridman/Documents/dbs/shuvu.csv" out-path:"/Users/tamirfridman/Documents/dbs/"`,context);
+    let response = await PAICode.executeString(`pai-module-builder version`,context);
     
     let toPrint = JSON.stringify(response[0].response.data);
     PAILogger.info(toPrint);

@@ -15,20 +15,21 @@
   */
 
 
-
-
-
 class PAI_HTML_WRITER {
 
     constructor() {
 
     }
 
-    static get_html_header(metadata,includes)
-    {
+    static get_html_header(metadata, includes) {
         let head_out = `<head><title>${metadata["page-title"]}</title>
         <script src="public/js/jquery-2.0.0.js"></script>
+        <script src="public/js/notify.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://kit.fontawesome.com/28c96941e4.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="shortcut icon" type="image/png" href="${metadata.icon}"/>
@@ -41,51 +42,49 @@ class PAI_HTML_WRITER {
 		<meta content="${metadata["page-title"]}" property="og:title">
 		<meta content="${metadata.icon}" property="og:image">
 		<meta content="${metadata.description}"" property="og:description">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		
 		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> 
+		
+
         ${includes}</head>`;
 
         return head_out;
     }
 
-    static start_tag(tag_name,id,css_class,style)
-    {
-        let res=`<${tag_name}`;
-        if(id) {
+    static start_tag(tag_name, id, css_class, style) {
+        let res = `<${tag_name}`;
+        if (id) {
             res += ` id="${id}"`;
         }
-        if(style) {
+        if (style) {
             res += ` style="${style}"`;
         }
-        if(css_class) {
+        if (css_class) {
             res += ` class="${css_class}"`;
         }
-        res +=">";
+        res += ">";
         return res;
     }
 
 
-
-    static close_tag(tag_name)
-    {
+    static close_tag(tag_name) {
         return `</${tag_name}>`;
     }
 
-    static get_image_tag(id,src,alt,css_class,style)
-    {
-        let img =  `<img id=${id} src="${src}"`;
+    static get_image_tag(id, src, alt, css_class, style) {
+        let img = `<img id=${id} src="${src}"`;
 
-        if(id) {
+        if (id) {
             img += ` id="${id}"`;
         }
-        if(style) {
+        if (style) {
             img += ` style="${style}"`;
         }
-        if(css_class) {
+        if (css_class) {
             img += ` class="${css_class}"`;
         }
 
-        if(alt) {
+        if (alt) {
             img += ` alt="${alt}" title="${alt}"`;
         }
 
@@ -94,24 +93,23 @@ class PAI_HTML_WRITER {
     }
 
 
-    static build_tag(tag_name,id,css_class,style,onclick_func)
-    {
+    static build_tag(tag_name, id, css_class, style, onclick_func) {
         let start_tag_attributes = "";
 
-        if(id) {
+        if (id) {
             start_tag_attributes += ` id="${id}"`;
         }
-        if(style) {
+        if (style) {
             start_tag_attributes += ` style="${style}"`;
         }
-        if(css_class) {
+        if (css_class) {
             start_tag_attributes += ` class="${css_class}"`;
         }
-        if(onclick_func) {
+        if (onclick_func) {
             start_tag_attributes += ` onclick="${onclick_func}"`;
         }
 
-        let res_obj= {
+        let res_obj = {
             start_tag: `<${tag_name + start_tag_attributes}>`,
             end_tag: `</${tag_name}>`
         };

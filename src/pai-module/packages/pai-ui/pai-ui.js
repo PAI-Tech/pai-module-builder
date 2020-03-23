@@ -15,19 +15,8 @@
 
 const path = require('path');
 const fs = require('fs');
-//const pai_server_data = require("../../data/pai-server-data");
 
 const PAIDesktop = require("./pai-desktop/pai-desktop-server");
-const PAIControlPanel = require("./pai-control-panel/pai-control-panel-server");
-const PAIVideoPlayer = require("./pai-video-player/pai-video-player-server");
-const PAIImage = require("./pai-image/pai-image-server");
-const PAIView = require("./pai-view/pai-view-server");
-const PAISlider = require("./pai-slider/pai-slider-server");
-const PAIPageHeader = require("./pai-page-header/pai-page-header-server");
-const PAIWindow = require("./pai-window/pai-window-server");
-const PAIHomePage = require("./pai-home-page/pai-home-page-server");
-const PAIPage = require("./pai-page/pai-page-server");
-
 
 let instance = null;
 
@@ -37,36 +26,35 @@ class PAIUI {
         this.package_name = 'pai-ui';
 
         this.packages = {
-            "pai-desktop": new PAIDesktop(),
-            "pai-control-panel": new PAIControlPanel(),
-            "pai-video-player": new PAIVideoPlayer(),
-            "pai-image": new PAIImage(),
-            "pai-view": new PAIView(),
-            "pai-slider" : new PAISlider(),
-            "pai-page-header" : new PAIPageHeader(),
-            "pai-window" : new PAIWindow(),
-            "pai-page": new PAIPage(),
-            "pai-home-page": new PAIHomePage(),
+            "pai-desktop": new PAIDesktop()
         };
 
-        //this.copy_public_files();
+
     }
 
 
+    get_package(package_name)
+    {
+        let pkg_obj = null;
+        if(this.packages.hasOwnProperty(package_name))
+        {
+            return this.packages[package_name];
+        }
+        else
+        {
+            let pkg_server_file_name = `./${package_name}/${package_name}-server`;
 
-    // copy_public_files() {
-    //
-    //     let target_base_folder = pai_server_data.get_instance.web_data["packages-folder"] + path.sep + this.package_name + path.sep;
-    //     //create packages folder
-    //     if (!fs.existsSync(target_base_folder)) {
-    //         fs.mkdirSync(target_base_folder);
-    //     }
-    //
-    //     for(let key in this.packages)
-    //     {
-    //         this.packages[key].copy_public_files();
-    //     }
-    // }
+            if(fs.existsSync(path.resolve(__dirname,pkg_server_file_name +".js")))
+            {
+                let new_pai_ui_pkg = require (pkg_server_file_name);
+                pkg_obj = new new_pai_ui_pkg();
+                this.packages[package_name] = pkg_obj;
+            }
+
+        }
+        return pkg_obj;
+    }
+
 
     static get get_instance()
     {

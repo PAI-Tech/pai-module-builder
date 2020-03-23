@@ -53,9 +53,12 @@ class PAI_HTML_BUILDER {
                 {
                     files += this.pai_ui.packages[imports[i]].get_html_includes();
                 }
-                else
-                {
-                    console.log("pai-ui package " + imports[i] + " not found");
+                else {
+                    let pkg_obj = this.pai_ui.get_package(imports[i]);
+                    if (pkg_obj) {
+                        this.pai_ui.packages[imports[i]] = pkg_obj;
+                        files += pkg_obj.get_html_includes();
+                    }
                 }
             }
 
